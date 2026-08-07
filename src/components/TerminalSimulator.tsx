@@ -386,7 +386,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
   };
 
   return (
-    <div className="flex-1 flex flex-col h-[calc(100vh-140px)] min-h-[500px]">
+    <div className="flex-1 flex flex-col min-h-[500px]">
       {/* Terminal Output Console */}
       <div className="bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden font-mono text-sm flex flex-col flex-1">
         {/* Terminal Header Bar */}
