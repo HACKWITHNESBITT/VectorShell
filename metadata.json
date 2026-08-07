@@ -1,0 +1,6 @@
+{
+  "name": "VectorShell",
+  "description": "VectorShell is a high-performance portable terminal simulator and offline Python utility suite. Features multi-mode AI automation, SHA-256 cryptographic file encryption and shredding, storage optimization, system diagnostics, and 1-click standalone USB script generation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
