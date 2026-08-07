@@ -2,7 +2,8 @@
 
 > **Next-Generation Portable Terminal Simulator & Standalone USB Power Suite**  
 > **Created by:** [Victor Kimutai](https://victor-kimutai.onrender.com)  
-> 🌐 **Live Demo Application:** [https://ais-pre-ubc4lwf4rlwwhi4fhdbu6i-606428422924.europe-west2.run.app](https://ais-pre-ubc4lwf4rlwwhi4fhdbu6i-606428422924.europe-west2.run.app)
+> 🌐 **Development Live Preview:** [https://ais-dev-ubc4lwf4rlwwhi4fhdbu6i-606428422924.europe-west2.run.app](https://ais-dev-ubc4lwf4rlwwhi4fhdbu6i-606428422924.europe-west2.run.app)  
+> 🌐 **Shared Live Application:** [https://ais-pre-ubc4lwf4rlwwhi4fhdbu6i-606428422924.europe-west2.run.app](https://ais-pre-ubc4lwf4rlwwhi4fhdbu6i-606428422924.europe-west2.run.app)
 
 ---
 
