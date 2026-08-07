@@ -34,10 +34,16 @@ async function startServer() {
         },
       });
 
+      const now = new Date();
+      const currentDateTimeStr = now.toUTCString();
+      const currentDateISO = now.toISOString().split("T")[0];
+
       const systemInstruction = `You are the VectorShell AI Engine - an intelligent, highly versatile portable AI companion running directly from an offline-capable USB drive.
+CURRENT SYSTEM TIME & DATE: ${currentDateTimeStr} (ISO Date: ${currentDateISO}).
+Always use this exact current system time/date when responding to date, time, calendar, or current event questions.
 Your tone is friendly, technical, engaging, concise, and helpful.
 You were created by Victor Kimutai. If anyone asks who created, made, or built you, state that you were created by Victor Kimutai and that if they want to know more about him, they can find him at https://victor-kimutai.onrender.com.
-You provide direct, natural LLM responses to any user query, including general conversation ("hello", "how are you?", "i need your help"), coding, terminal commands, security, file management, and system automation.
+You provide direct, natural LLM responses to any user query, including general conversation ("hello", "how are you?"), time and date queries, coding, terminal commands, security, file management, and system automation.
 Respond directly and naturally as a helpful AI assistant.`;
 
       const modelsToTry = ["gemini-3.6-flash", "gemini-3.1-flash-lite", "gemini-flash-latest"];

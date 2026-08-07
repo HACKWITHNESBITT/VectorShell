@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { TerminalLog } from '../types';
-import { Terminal, Send, Trash2, RefreshCw, Copy, Check, Play, Sparkles } from 'lucide-react';
+import { Terminal, Send, Trash2, Copy, Check } from 'lucide-react';
 
 // Subcomponent for ChatGPT-style Code Block with Copy button & syntax styling
 const CodeSnippetBlock: React.FC<{ lang: string; code: string }> = ({ lang, code }) => {
@@ -227,14 +227,12 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
       const data = await res.json();
       setLogs((prev) => prev.filter((l) => l.id !== thinkingId));
 
-      if (data && data.success && data.reply) {
-        addLog('output', data.reply);
-      } else {
-        addLog('output', processOfflineQuery(promptText));
-      }
+      const reply = (data && data.success && data.reply) ? data.reply : processOfflineQuery(promptText);
+      addLog('output', reply);
     } catch {
       setLogs((prev) => prev.filter((l) => l.id !== thinkingId));
-      addLog('output', processOfflineQuery(promptText));
+      const fallbackReply = processOfflineQuery(promptText);
+      addLog('output', fallbackReply);
     }
   };
 
@@ -245,7 +243,6 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
     addLog('input', `VectorShell> ${trimmed}`);
 
     // If user enclosed query in square brackets e.g. "ask [how to setup python script...]" or "[query]"
-    // Strip leading/trailing brackets around prompt arguments if present
     const askMatch = trimmed.match(/^(ask|explain)\s*\[?(.*?)\]?$/i);
     if (askMatch) {
       const query = askMatch[2].trim();
