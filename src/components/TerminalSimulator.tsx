@@ -2,6 +2,73 @@ import React, { useState, useRef, useEffect } from 'react';
 import { TerminalLog } from '../types';
 import { Terminal, Send, Trash2, RefreshCw, Copy, Check, Play, Sparkles } from 'lucide-react';
 
+// Subcomponent for ChatGPT-style Code Block with Copy button & syntax styling
+const CodeSnippetBlock: React.FC<{ lang: string; code: string }> = ({ lang, code }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code.trim());
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="my-3 rounded-lg overflow-hidden border border-slate-700 bg-slate-900/90 shadow-xl font-mono text-xs text-slate-200">
+      {/* Code Header Bar */}
+      <div className="bg-slate-800/90 px-3.5 py-1.5 flex items-center justify-between border-b border-slate-700 select-none">
+        <span className="text-cyan-400 font-semibold tracking-wide uppercase text-[11px] flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+          {lang || 'code'}
+        </span>
+        <button
+          onClick={handleCopy}
+          className="flex items-center space-x-1 px-2 py-0.5 rounded bg-slate-700/60 hover:bg-slate-700 text-slate-300 hover:text-white transition-all text-[11px]"
+        >
+          {copied ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="text-emerald-400 font-medium">Copied!</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-3.5 h-3.5 text-slate-400" />
+              <span>Copy code</span>
+            </>
+          )}
+        </button>
+      </div>
+
+      {/* Syntax Highlighted Code Content */}
+      <div className="p-3.5 overflow-x-auto bg-slate-950/80 leading-relaxed text-emerald-300 font-mono">
+        <pre className="whitespace-pre">{code.trim()}</pre>
+      </div>
+    </div>
+  );
+};
+
+const renderTextWithLinks = (text: string) => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  const parts = text.split(urlRegex);
+
+  return parts.map((part, i) => {
+    if (/^https?:\/\/[^\s]+$/.test(part)) {
+      return (
+        <a
+          key={i}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline text-cyan-300 hover:text-cyan-100 font-bold transition-colors cursor-pointer"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {part}
+        </a>
+      );
+    }
+    return part;
+  });
+};
+
 export const TerminalSimulator: React.FC = () => {
   const [logs, setLogs] = useState<TerminalLog[]>([
     {
@@ -172,10 +239,23 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
   };
 
   const executeCommand = (rawCmd: string) => {
-    const trimmed = rawCmd.trim();
+    let trimmed = rawCmd.trim();
     if (!trimmed) return;
 
     addLog('input', `VectorShell> ${trimmed}`);
+
+    // If user enclosed query in square brackets e.g. "ask [how to setup python script...]" or "[query]"
+    // Strip leading/trailing brackets around prompt arguments if present
+    const askMatch = trimmed.match(/^(ask|explain)\s*\[?(.*?)\]?$/i);
+    if (askMatch) {
+      const query = askMatch[2].trim();
+      if (!query || query.toLowerCase() === 'query') {
+        addLog('output', '[VectorShell AI Engine] Ask me anything about system automation, offline python scripts, or code logic!');
+      } else {
+        callGeminiApi(query);
+      }
+      return;
+    }
 
     const parts = trimmed.split(' ');
     const cmd = parts[0].toLowerCase();
@@ -341,16 +421,6 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
         }
         break;
 
-      case 'ask':
-      case 'explain':
-        const query = args.join(' ');
-        if (!query) {
-          addLog('output', '[VectorShell AI Engine] Ask me anything about system automation, offline python scripts, or code logic!');
-        } else {
-          callGeminiApi(query);
-        }
-        break;
-
       case 'setup':
         addLog(
           'success',
@@ -429,29 +499,58 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
             if (log.type === 'error') textColor = 'text-red-400 font-bold';
             if (log.type === 'system') textColor = 'text-purple-400';
 
-            const urlRegex = /(https?:\/\/[^\s]+)/g;
-            const parts = log.text.split(urlRegex);
+            // Check if log contains markdown code blocks (```lang ... ```)
+            const codeBlockRegex = /```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g;
+            const hasCodeBlock = codeBlockRegex.test(log.text);
+
+            if (hasCodeBlock) {
+              const elements: React.ReactNode[] = [];
+              let lastIndex = 0;
+              let match;
+              const regex = /```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g;
+
+              while ((match = regex.exec(log.text)) !== null) {
+                // Text before code block
+                if (match.index > lastIndex) {
+                  const textChunk = log.text.substring(lastIndex, match.index);
+                  elements.push(
+                    <span key={`text-${lastIndex}`} className={textColor}>
+                      {renderTextWithLinks(textChunk)}
+                    </span>
+                  );
+                }
+
+                const lang = match[1] || 'code';
+                const codeContent = match[2];
+
+                elements.push(
+                  <CodeSnippetBlock key={`code-${match.index}`} lang={lang} code={codeContent} />
+                );
+
+                lastIndex = regex.lastIndex;
+              }
+
+              // Trailing text
+              if (lastIndex < log.text.length) {
+                const trailingText = log.text.substring(lastIndex);
+                elements.push(
+                  <span key={`text-${lastIndex}`} className={textColor}>
+                    {renderTextWithLinks(trailingText)}
+                  </span>
+                );
+              }
+
+              return (
+                <div key={log.id} className="whitespace-pre-wrap break-words space-y-2 my-1">
+                  {elements}
+                </div>
+              );
+            }
 
             return (
               <div key={log.id} className="whitespace-pre-wrap break-words">
                 <span className={textColor}>
-                  {parts.map((part, i) => {
-                    if (/^https?:\/\/[^\s]+$/.test(part)) {
-                      return (
-                        <a
-                          key={i}
-                          href={part}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="underline text-cyan-300 hover:text-cyan-100 font-bold transition-colors cursor-pointer"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          {part}
-                        </a>
-                      );
-                    }
-                    return part;
-                  })}
+                  {renderTextWithLinks(log.text)}
                 </span>
               </div>
             );
