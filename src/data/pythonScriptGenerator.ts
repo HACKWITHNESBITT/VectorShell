@@ -7,13 +7,13 @@ export function generatePythonScript(config: ScriptConfig): string {
 # -*- coding: utf-8 -*-
 """
 ===============================================================================
- ANTIGRAVITY USB POWER SUITE - FULLY OFFLINE EDITION v3.0
+ VECTOR SHELL - PORTABLE OFFLINE POWER SUITE v3.0
  Generated: ${dateStr}
  Target: Standard Python 3.6+ (Windows, macOS, Linux)
  External Dependencies: ZERO (Uses 100% Python Standard Library)
 ===============================================================================
  Features Included:
- - ${config.includeAssistant ? 'Offline Antigravity Conversational Intelligence & Rule-Based NLP' : 'Disabled'}
+ - ${config.includeAssistant ? 'Offline VectorShell Conversational Intelligence & Rule-Based NLP' : 'Disabled'}
  - ${config.includeSystemTools ? 'System Diagnostics & Storage Inspector' : 'Disabled'}
  - ${config.includeVault ? 'Offline Security Vault & File Encryption / Shredder' : 'Disabled'}
  - ${config.includeUsbOrganizer ? 'USB File Organizer & Duplicate Cleaner' : 'Disabled'}
@@ -44,13 +44,12 @@ from pathlib import Path
 VERSION = "3.0.0-OFFLINE"
 BANNER = """
 ===============================================================================
-     _____   _  _______ _____  _____   ___  _   _ _____ _______   __
-    / _ \\ \\ | |/ /_   _/ ____|  __ \\ / _ \\| | | |_   _/ ____\\ \\ / /
-   / /_\\ \\ \\| |   | | | |  __| |__) | /_\\ \\ |_| | | | | |  __\\ V / 
-   |  _  | .   |  | | | | |_ |  _  /|  _  |  _  | | | | | |_ | |  
-   |_| |_|_|\\_|   |_| |_____|_| \\_\\_| |_|_| |_|_|___|  \\_____|_|  
-   
-              ANTIGRAVITY USB OFFLINE POWER SUITE v""" + VERSION + """
+  __   _____ _____ _____ ___  ___   ___ _  _ ___ _    _    
+  \\ \\ / / __/ __|_   _/ _ \\| _ \\ / __| || | __| |  | |   
+   \\ V /| _|| (__ | | | (_) |   / \\__ \\ __ | _|| |__| |__ 
+    \\_/ |___\\___||_|  \\___/|_|_\\ |___/_||_|___|____|____|
+
+                     VECTOR SHELL PORTABLE SUITE v""" + VERSION + """
       [100% Offline | Zero Dependencies | Full System Control & Assistant]
 ===============================================================================
 """
@@ -343,9 +342,9 @@ class NotesVault:
 
 ${config.includeAssistant ? `
 # =============================================================================
-# MODULE: ANTIGRAVITY CONVERSATIONAL AI ENGINE (GEMINI LLM + OFFLINE FALLBACK)
+# MODULE: VECTOR SHELL CONVERSATIONAL AI ENGINE (GEMINI LLM + OFFLINE FALLBACK)
 # =============================================================================
-class AntigravityOfflineAI:
+class VectorShellOfflineAI:
     KNOWLEDGE_BASE = {
         "python": "Python is a high-level interpreted language. Offline tips: Use 'sys', 'os', 'subprocess' for automation without external packages.",
         "usb": "USB drives format tips: NTFS/exFAT support large files (>4GB). FAT32 works on all hardware. Use eject safely.",
@@ -364,7 +363,7 @@ class AntigravityOfflineAI:
             payload = {
                 "contents": [{"parts": [{"text": prompt}]}],
                 "systemInstruction": {
-                    "parts": [{"text": "You are the Antigravity USB Power Suite AI Engine - an intelligent portable companion running from a USB drive. Respond concisely, helpfully, and with developer expertise."}]
+                    "parts": [{"text": "You are the VectorShell AI Engine - an intelligent portable companion running from a USB drive. Respond concisely, helpfully, and with developer expertise."}]
                 }
             }
             data = json.dumps(payload).encode("utf-8")
@@ -372,14 +371,14 @@ class AntigravityOfflineAI:
             with urllib.request.urlopen(req, timeout=10) as response:
                 result = json.loads(response.read().decode("utf-8"))
                 text = result["candidates"][0]["content"]["parts"][0]["text"]
-                return f"[Antigravity Online AI (Gemini 3.6 Flash)]\\n{text}"
+                return f"[VectorShell Online AI (Gemini 3.6 Flash)]\\n{text}"
         except Exception:
             return None
 
     @staticmethod
     def process_query(prompt: str) -> str:
         # Check if Gemini API is available online first
-        online_res = AntigravityOfflineAI.query_gemini_api(prompt)
+        online_res = VectorShellOfflineAI.query_gemini_api(prompt)
         if online_res:
             return online_res
 
@@ -390,40 +389,40 @@ class AntigravityOfflineAI:
                 expr = re.sub(r'[^0-9\\+\\-\\*/\\%\\.\\(\\)\\s\\,math]', '', prompt)
                 if expr.strip():
                     val = eval(expr, {"__builtins__": None, "math": math})
-                    return f"[Antigravity AI Math Engine] Result: {val}"
+                    return f"[VectorShell AI Math Engine] Result: {val}"
             except Exception:
                 pass
 
         if any(w in prompt_clean for w in ["hello", "hi", "hey", "friend", "greetings", "howdy", "sup", "yo"]):
-            return "[Antigravity Offline AI] Greetings, friend! I am your Antigravity Offline AI Assistant running directly from your USB drive.\\nI am fully operational and ready to assist with offline code generation, file encryption, storage cleanup, system diagnostics, and local automation.\\nType 'help' to view all commands or type any question to query my offline knowledge base!"
+            return "[VectorShell Offline AI] Greetings, friend! I am your VectorShell Offline AI Assistant running directly from your USB drive.\\nI am fully operational and ready to assist with offline code generation, file encryption, storage cleanup, system diagnostics, and local automation.\\nType 'help' to view all commands or type any question to query my offline knowledge base!"
 
         if any(w in prompt_clean for w in ["who created you", "who made you", "who built you", "creator", "developer"]):
             return "I was created by Victor Kimutai. If you want to know more about him, you'll find him at https://victor-kimutai.onrender.com"
 
         if "who are you" in prompt_clean or "about" in prompt_clean or "identity" in prompt_clean:
-            return "[Antigravity Offline AI] I am the Antigravity USB Power Suite Offline Intelligence Engine v3.0.\\nBuilt with 100% standard Python libraries, I execute completely offline with zero cloud dependency.\\nFeatures: System Diagnostics, Hardware Reports, SHA-256 Shredder, Multi-byte XOR Encryption, Password Generator, USB Auto-Organizer, and Encrypted Vault Notes."
+            return "[VectorShell Offline AI] I am the VectorShell Offline Intelligence Engine v3.0.\\nBuilt with 100% standard Python libraries, I execute completely offline with zero cloud dependency.\\nFeatures: System Diagnostics, Hardware Reports, SHA-256 Shredder, Multi-byte XOR Encryption, Password Generator, USB Auto-Organizer, and Encrypted Vault Notes."
 
         if any(w in prompt_clean for w in ["thank", "thanks", "awesome", "cool", "great", "nice"]):
-            return "[Antigravity Offline AI] You're very welcome! Stay secure and productive wherever your USB takes you."
+            return "[VectorShell Offline AI] You're very welcome! Stay secure and productive wherever your USB takes you."
 
         if any(w in prompt_clean for w in ["encrypt", "secret", "lock", "vault", "shred"]):
-            return "[Antigravity Offline AI] Security Vault:\\n• Use 'encrypt <file> <passphrase>' to lock any file with multi-byte XOR & SHA-256 key derivation.\\n• Use 'decrypt <file.agv> <passphrase>' to restore it.\\n• Use 'shred <file>' for 3-pass cryptographic wipe."
+            return "[VectorShell Offline AI] Security Vault:\\n• Use 'encrypt <file> <passphrase>' to lock any file with multi-byte XOR & SHA-256 key derivation.\\n• Use 'decrypt <file.agv> <passphrase>' to restore it.\\n• Use 'shred <file>' for 3-pass cryptographic wipe."
 
         if any(w in prompt_clean for w in ["clean", "disk", "space", "temp", "storage"]):
-            return "[Antigravity Offline AI] Storage Management:\\n• Use 'disk' to inspect storage capacity.\\n• Use 'clean' to remove temp files.\\n• Use 'duplicates' to scan duplicate files via SHA-256."
+            return "[VectorShell Offline AI] Storage Management:\\n• Use 'disk' to inspect storage capacity.\\n• Use 'clean' to remove temp files.\\n• Use 'duplicates' to scan duplicate files via SHA-256."
 
         if any(w in prompt_clean for w in ["organize", "sort", "files"]):
-            return "[Antigravity Offline AI] USB Organizer:\\n• Use 'organize' to automatically sort files into /Documents, /Media, /Code, /Archives, and /Executables."
+            return "[VectorShell Offline AI] USB Organizer:\\n• Use 'organize' to automatically sort files into /Documents, /Media, /Code, /Archives, and /Executables."
 
         if "explain" in prompt_clean or "code" in prompt_clean:
             concept = prompt_clean.replace("explain", "").replace("code", "").strip()
-            return f"[Antigravity AI Code Mentor] Concept analysis for '{concept}':\\n- Structure: Pure Python pattern\\n- Execution: Fully offline standard library\\n- Recommendation: Ensure exception handling around file I/O operations."
+            return f"[VectorShell AI Code Mentor] Concept analysis for '{concept}':\\n- Structure: Pure Python pattern\\n- Execution: Fully offline standard library\\n- Recommendation: Ensure exception handling around file I/O operations."
 
-        for key, knowledge in AntigravityOfflineAI.KNOWLEDGE_BASE.items():
+        for key, knowledge in VectorShellOfflineAI.KNOWLEDGE_BASE.items():
             if key in prompt_clean:
-                return f"[Antigravity Offline Knowledge] {knowledge}"
+                return f"[VectorShell Offline Knowledge] {knowledge}"
 
-        return f"[Antigravity Offline AI] Processed query: '{prompt}'\\nStatus: Pure local execution active. Memory & hardware state optimal.\\n• Tip: Run 'help' for full CLI cheatsheet or 'sysinfo' for system diagnostics."
+        return f"[VectorShell Offline AI] Processed query: '{prompt}'\\nStatus: Pure local execution active. Memory & hardware state optimal.\\n• Tip: Run 'help' for full CLI cheatsheet or 'sysinfo' for system diagnostics."
 ` : ''}
 
 # =============================================================================
@@ -433,10 +432,10 @@ def generate_usb_launchers():
     color_print("[*] Generating USB Portable Launcher scripts...", Colors.CYAN)
     
     bat_content = """@echo off
-TITLE Antigravity USB Power Suite
+TITLE VectorShell Portable Suite
 cls
-echo Starting Antigravity USB Suite...
-python "%~dp0usb_antigravity.py" %*
+echo Starting VectorShell Portable Suite...
+python "%~dp0vectorshell.py" %*
 if %ERRORLEVEL% NEQ 0 (
     echo.
     echo Python standard runtime not detected on PATH.
@@ -450,8 +449,8 @@ if %ERRORLEVEL% NEQ 0 (
         
     sh_content = """#!/usr/bin/env bash
 DIR="$( cd "$( dirname "\${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-echo "Launching Antigravity USB Power Suite..."
-python3 "$DIR/usb_antigravity.py" "$@"
+echo "Launching VectorShell Portable Suite..."
+python3 "$DIR/vectorshell.py" "$@"
 """
     sh_path = SCRIPT_DIR / "run_usb.sh"
     with open(sh_path, "w", encoding="utf-8") as f:
@@ -467,7 +466,7 @@ python3 "$DIR/usb_antigravity.py" "$@"
 # =============================================================================
 # INTERACTIVE TERMINAL CLI SHELL
 # =============================================================================
-class AntigravityCLI:
+class VectorShellCLI:
     def __init__(self):
         self.running = True
 
@@ -483,13 +482,13 @@ class AntigravityCLI:
         print("  decrypt [file] [pass]    - Decrypt .agv locked file")
         print("  shred [file]             - Secure multi-pass file wipe")
         print("  genpass [length]         - Generate strong cryptographic password")
-        print("  ask [query]              - Chat with Antigravity Offline AI")
+        print("  ask [query]              - Chat with VectorShell Offline AI")
         print("  calc [expr]              - Offline scientific math calculator")
         print("  note add [title] [body]  - Save encrypted note to USB vault")
         print("  note list                - View all USB vault notes")
         print("  setup                    - Re-generate USB batch/shell launchers")
         print("  gui                      - Launch Tkinter Desktop UI (if available)")
-        print("  exit / quit              - Exit Antigravity USB Suite")
+        print("  exit / quit              - Exit VectorShell Portable Suite")
         print("===========================================================\\n")
 
     def run(self):
@@ -498,7 +497,7 @@ class AntigravityCLI:
         
         while self.running:
             try:
-                prompt_str = f"\\n{Colors.CYAN}{Colors.BOLD}Antigravity-USB>{Colors.RESET} "
+                prompt_str = f"\\n{Colors.CYAN}{Colors.BOLD}VectorShell>{Colors.RESET} "
                 user_input = input(prompt_str).strip()
                 if not user_input:
                     continue
@@ -508,7 +507,7 @@ class AntigravityCLI:
                 args = parts[1:]
 
                 if cmd in ['exit', 'quit']:
-                    color_print("Exiting Antigravity USB Suite. Have a productive day!", Colors.CYAN)
+                    color_print("Exiting VectorShell Portable Suite. Have a productive day!", Colors.CYAN)
                     self.running = False
                 elif cmd == 'help':
                     self.print_help()
@@ -568,11 +567,11 @@ class AntigravityCLI:
                 ${config.includeAssistant ? `
                 elif cmd == 'ask':
                     query = " ".join(args)
-                    res = AntigravityOfflineAI.process_query(query)
+                    res = VectorShellOfflineAI.process_query(query)
                     color_print(res, Colors.CYAN)
                 elif cmd == 'calc':
                     expr = " ".join(args)
-                    res = AntigravityOfflineAI.process_query(expr)
+                    res = VectorShellOfflineAI.process_query(expr)
                     color_print(res, Colors.MAGENTA)
                 ` : ''}
                 elif cmd == 'setup':
@@ -581,7 +580,7 @@ class AntigravityCLI:
                     launch_gui()
                 else:
                     ${config.includeAssistant ? `
-                    res = AntigravityOfflineAI.process_query(user_input)
+                    res = VectorShellOfflineAI.process_query(user_input)
                     color_print(res, Colors.CYAN)
                     ` : `
                     color_print(f"Unknown command: '{cmd}'. Type 'help' for available commands.", Colors.RED)
@@ -603,19 +602,19 @@ def launch_gui():
         return
 
     root = tk.Tk()
-    root.title(f"Antigravity USB Power Suite v{VERSION}")
+    root.title(f"VectorShell v{VERSION}")
     root.geometry("800x550")
     root.configure(bg="#1e1e2e")
 
-    lbl_title = tk.Label(root, text="ANTIGRAVITY USB SUITE", font=("Helvetica", 18, "bold"), fg="#89b4fa", bg="#1e1e2e")
+    lbl_title = tk.Label(root, text="VECTORSHELL SUITE", font=("Helvetica", 18, "bold"), fg="#89b4fa", bg="#1e1e2e")
     lbl_title.pack(pady=10)
 
-    lbl_sub = tk.Label(root, text="100% Offline USB Control Center", font=("Helvetica", 10), fg="#a6adc8", bg="#1e1e2e")
+    lbl_sub = tk.Label(root, text="100% Offline Portable Control Center", font=("Helvetica", 10), fg="#a6adc8", bg="#1e1e2e")
     lbl_sub.pack()
 
     txt_log = tk.Text(root, bg="#11111b", fg="#a6e3a1", font=("Consolas", 10), insertbackground="white")
     txt_log.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
-    txt_log.insert(tk.END, "Antigravity USB GUI Initialized.\\nClick buttons below or type command.\\n\\n")
+    txt_log.insert(tk.END, "VectorShell GUI Initialized.\\nClick buttons below or type command.\\n\\n")
 
     btn_frame = tk.Frame(root, bg="#1e1e2e")
     btn_frame.pack(fill=tk.X, padx=15, pady=10)
@@ -642,7 +641,7 @@ def launch_gui():
 # MAIN ENTRY POINT
 # =============================================================================
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Antigravity USB Power Suite - Offline Tool")
+    parser = argparse.ArgumentParser(description="VectorShell - Portable Offline Tool")
     parser.add_argument("--gui", action="store_true", help="Launch Graphical User Interface directly")
     parser.add_argument("--setup", action="store_true", help="Generate USB launcher scripts and exit")
     args = parser.parse_args()
@@ -655,7 +654,7 @@ if __name__ == "__main__":
         if not (SCRIPT_DIR / "RUN_USB.bat").exists():
             generate_usb_launchers()
             
-        cli = AntigravityCLI()
+        cli = VectorShellCLI()
         cli.run()
 `;
 }

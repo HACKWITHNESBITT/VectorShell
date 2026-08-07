@@ -21,7 +21,7 @@
   - **Online Mode:** Connected to Gemini API (`gemini-3.6-flash`, `gemini-3.1-flash-lite`, `gemini-flash-latest`).
   - **Offline Fallback:** Instant local pattern matching and AI queries with zero external dependencies.
 
-### 🐍 2. Portable Python Execution Engine (`antigravity_usb.py`)
+### 🐍 2. Portable Python Execution Engine (`vectorshell.py`)
 - **Zero External Dependencies:** Built using strictly Python standard library modules (`os`, `sys`, `shutil`, `subprocess`, `json`, `hashlib`, `secrets`, `math`).
 - Downloadable directly from the terminal or main application UI with 1-click installer creation (`.bat` for Windows and `.sh` for Linux/macOS).
 - Runs natively on Windows, macOS, and Linux without needing `pip install`.
@@ -45,7 +45,7 @@
 | Command | Description | Example |
 | :--- | :--- | :--- |
 | `help` | Display interactive CLI cheatsheet and commands menu | `help` |
-| `ask <query>` | Query the Antigravity AI Engine (online/offline) | `ask how to encrypt a file` |
+| `ask <query>` | Query the VectorShell AI Engine (online/offline) | `ask how to encrypt a file` |
 | `encrypt <file> <passphrase>` | Encrypt a file using SHA-256 key derivation and multi-byte XOR | `encrypt secrets.txt MyKey123` |
 | `decrypt <file.agv> <passphrase>` | Decrypt a `.agv` encrypted vault file | `decrypt secrets.txt.agv MyKey123` |
 | `shred <file>` | Securely wipe and obliterate a file with 3-pass overwrite | `shred sensitive.pdf` |
@@ -58,7 +58,7 @@
 | `note add <title> <body>` | Save an encrypted note to the local vault | `note add Pin 12345` |
 | `note list` | Read saved notes from the local vault | `note list` |
 | `setup` | Generate 1-click batch (`.bat`) and shell (`.sh`) launchers | `setup` |
-| `download` | Download the portable `antigravity_usb.py` script | `download` |
+| `download` | Download the portable `vectorshell.py` script | `download` |
 | `cls` / `clear` | Clear the terminal screen buffer | `clear` |
 
 ---

@@ -13,7 +13,7 @@ export const UsbInstallerGuide: React.FC = () => {
           <div>
             <h2 className="text-xl font-bold text-white">USB Drive Installation & Offline Guide</h2>
             <p className="text-sm text-slate-400">
-              Follow these simple steps to deploy Antigravity USB Power Suite onto any USB flash drive.
+              Follow these simple steps to deploy VectorShell onto any USB flash drive.
             </p>
           </div>
         </div>
@@ -29,11 +29,11 @@ export const UsbInstallerGuide: React.FC = () => {
           </div>
           <h3 className="font-bold text-white text-lg">Download Files to USB Root</h3>
           <p className="text-xs text-slate-400 leading-relaxed">
-            Download <code className="text-cyan-300 font-mono">usb_antigravity.py</code>, <code className="text-cyan-300 font-mono">RUN_USB.bat</code>, and <code className="text-cyan-300 font-mono">run_usb.sh</code> and place them directly in the root directory of your USB drive (e.g., <code className="text-slate-300">E:\</code> or <code className="text-slate-300">/media/usb/</code>).
+            Download <code className="text-cyan-300 font-mono">vectorshell.py</code>, <code className="text-cyan-300 font-mono">RUN_USB.bat</code>, and <code className="text-cyan-300 font-mono">run_usb.sh</code> and place them directly in the root directory of your USB drive (e.g., <code className="text-slate-300">E:\</code> or <code className="text-slate-300">/media/usb/</code>).
           </p>
           <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 font-mono text-[11px] text-cyan-300 space-y-1">
             <div>E:\</div>
-            <div> ├── usb_antigravity.py</div>
+            <div> ├── vectorshell.py</div>
             <div> ├── RUN_USB.bat</div>
             <div> └── run_usb.sh</div>
           </div>
@@ -70,7 +70,7 @@ export const UsbInstallerGuide: React.FC = () => {
             If the target host PC has no Python installed, copy an embeddable Python zip (like WinPython or Official Python Embeddable Package) into a <code className="text-cyan-300 font-mono">\python_portable\</code> folder on your USB drive.
           </p>
           <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 font-mono text-[11px] text-slate-300">
-            E:\python_portable\python.exe E:\usb_antigravity.py
+            E:\python_portable\python.exe E:\vectorshell.py
           </div>
         </div>
 

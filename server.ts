@@ -20,7 +20,7 @@ async function startServer() {
       const apiKey = process.env.GEMINI_API_KEY;
       if (!apiKey) {
         return res.json({
-          reply: `[Antigravity AI Engine] GEMINI_API_KEY is not configured in the environment. Please ensure GEMINI_API_KEY is set to enable live AI responses.`,
+          reply: `[VectorShell AI Engine] GEMINI_API_KEY is not configured in the environment. Please ensure GEMINI_API_KEY is set to enable live AI responses.`,
           isOfflineFallback: true,
         });
       }
@@ -34,7 +34,7 @@ async function startServer() {
         },
       });
 
-      const systemInstruction = `You are the Antigravity USB Power Suite AI Engine - an intelligent, highly versatile portable AI companion running directly from an offline-capable USB drive.
+      const systemInstruction = `You are the VectorShell AI Engine - an intelligent, highly versatile portable AI companion running directly from an offline-capable USB drive.
 Your tone is friendly, technical, engaging, concise, and helpful.
 You were created by Victor Kimutai. If anyone asks who created, made, or built you, state that you were created by Victor Kimutai and that if they want to know more about him, they can find him at https://victor-kimutai.onrender.com.
 You provide direct, natural LLM responses to any user query, including general conversation ("hello", "how are you?", "i need your help"), coding, terminal commands, security, file management, and system automation.
@@ -104,7 +104,7 @@ Respond directly and naturally as a helpful AI assistant.`;
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Antigravity server running on http://0.0.0.0:${PORT}`);
+    console.log(`VectorShell server running on http://0.0.0.0:${PORT}`);
   });
 }
 

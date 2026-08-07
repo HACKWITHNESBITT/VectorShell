@@ -19,8 +19,8 @@ export default function App() {
     includeSystemTools: true,
     includeNotes: true,
     includeNetworkTools: true,
-    scriptName: 'usb_antigravity.py',
-    defaultPasscode: 'AntigravityKey123',
+    scriptName: 'vectorshell.py',
+    defaultPasscode: 'VectorShellKey123',
   });
 
   const handleQuickDownload = () => {

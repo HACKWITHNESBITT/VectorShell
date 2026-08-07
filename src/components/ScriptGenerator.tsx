@@ -24,8 +24,8 @@ export const ScriptGenerator: React.FC<ScriptGeneratorProps> = ({ config, setCon
         includeSystemTools: true,
         includeNotes: true,
         includeNetworkTools: true,
-        scriptName: 'usb_antigravity.py',
-        defaultPasscode: 'AntigravityKey123',
+        scriptName: 'vectorshell.py',
+        defaultPasscode: 'VectorShellKey123',
       },
     },
     {
@@ -55,7 +55,7 @@ export const ScriptGenerator: React.FC<ScriptGeneratorProps> = ({ config, setCon
         includeNotes: true,
         includeNetworkTools: true,
         scriptName: 'usb_cli.py',
-        defaultPasscode: 'AntigravityKey123',
+        defaultPasscode: 'VectorShellKey123',
       },
     },
   ];
@@ -66,22 +66,22 @@ export const ScriptGenerator: React.FC<ScriptGeneratorProps> = ({ config, setCon
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = config.scriptName || 'usb_antigravity.py';
+    a.download = config.scriptName || 'vectorshell.py';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    setDownloadSuccess('usb_antigravity.py downloaded successfully!');
+    setDownloadSuccess(`${config.scriptName || 'vectorshell.py'} downloaded successfully!`);
     setTimeout(() => setDownloadSuccess(null), 3000);
   };
 
   const handleDownloadBat = () => {
     const bat = `@echo off
-TITLE Antigravity USB Power Suite
+TITLE VectorShell Portable Suite
 cls
-echo Launching Antigravity USB Power Suite...
-python "%~dp0${config.scriptName || 'usb_antigravity.py'}" %*
+echo Launching VectorShell Portable Suite...
+python "%~dp0${config.scriptName || 'vectorshell.py'}" %*
 if %ERRORLEVEL% NEQ 0 (
     echo.
     echo Python 3 was not found on system PATH.
@@ -103,8 +103,8 @@ if %ERRORLEVEL% NEQ 0 (
   const handleDownloadSh = () => {
     const sh = `#!/usr/bin/env bash
 DIR="$( cd "$( dirname "\${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-echo "Launching Antigravity USB Power Suite..."
-python3 "$DIR/${config.scriptName || 'usb_antigravity.py'}" "$@"
+echo "Launching VectorShell Portable Suite..."
+python3 "$DIR/${config.scriptName || 'vectorshell.py'}" "$@"
 `;
     const blob = new Blob([sh], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
@@ -202,7 +202,7 @@ python3 "$DIR/${config.scriptName || 'usb_antigravity.py'}" "$@"
             <div className="space-y-1">
               <div className="flex items-center space-x-2">
                 <Bot className="w-4 h-4 text-cyan-400" />
-                <span className="text-sm font-bold text-white">Antigravity Offline AI Engine</span>
+                <span className="text-sm font-bold text-white">VectorShell Offline AI Engine</span>
               </div>
               <p className="text-xs text-slate-400">
                 Rule-based NLP parser, math evaluator, offline knowledge base, and code explanation mentor.

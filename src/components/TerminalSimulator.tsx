@@ -8,13 +8,12 @@ export const TerminalSimulator: React.FC = () => {
       id: '1',
       type: 'banner',
       text: `===============================================================================
-     _____   _  _______ _____  _____   ___  _   _ _____ _______   __
-    / _ \\ \\ | |/ /_   _/ ____|  __ \\ / _ \\| | | |_   _/ ____\\ \\ / /
-   / /_\\ \\ \\| |   | | | |  __| |__) | /_\\ \\ |_| | | | | |  __\\ V / 
-   |  _  | . \` |  | | | | |_ |  _  /|  _  |  _  | | | | | |_ | |  
-   |_| |_|_|\\_|   |_| |_____|_| \\_\\_| |_|_| |_|_|___|  \\_____|_|  
+  __   _____ _____ _____ ___  ___   ___ _  _ ___ _    _    
+  \\ \\ / / __/ __|_   _/ _ \\| _ \\ / __| || | __| |  | |   
+   \\ V /| _|| (__ | | | (_) |   / \\__ \\ __ | _|| |__| |__ 
+    \\_/ |___\\___||_|  \\___/|_|_\\ |___/_||_|___|____|____|
 
-              ANTIGRAVITY USB OFFLINE POWER SUITE v3.0
+                     VECTOR SHELL PORTABLE SUITE v3.0
       [100% Offline | Zero Dependencies | Full System Control & Assistant]
 ===============================================================================
 Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
@@ -60,7 +59,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
         // eslint-disable-next-line no-eval
         const result = eval(sanitized);
         if (typeof result === 'number' && !isNaN(result)) {
-          return `[Antigravity Offline Math Engine] Result: ${result}`;
+          return `[VectorShell Offline Math Engine] Result: ${result}`;
         }
       } catch {
         // ignore, fall through
@@ -70,7 +69,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
     // 2. Greetings & Friendly chatter
     if (/\b(hello|hi|hey|greetings|friend|howdy|sup|yo|good morning|good afternoon)\b/i.test(p)) {
       return (
-        `Greetings, friend! I am your Antigravity USB Power Suite AI companion.\n` +
+        `Greetings, friend! I am your VectorShell AI companion.\n` +
         `I can help you with CLI automation, Python scripting, file encryption, storage maintenance, and general technical questions.\n` +
         `How can I assist you today?`
       );
@@ -91,7 +90,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
     // 5. Identity / Purpose
     if (/\b(who are you|what are you|what can you do|about|purpose|identity)\b/i.test(p)) {
       return (
-        `I am the Antigravity USB Power Suite AI Engine v3.0.\n` +
+        `I am the VectorShell AI Engine v3.0.\n` +
         `Designed for portable power, local execution, and smart assistant capabilities.\n` +
         `Features: System Diagnostics, Hardware Audits, SHA-256 File Shredder, Multi-byte XOR Encryption, Password Generator, USB Auto-Organizer, and Encrypted Vault Notes.`
       );
@@ -122,7 +121,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
     if (/\b(python|code|script|standard library)\b/i.test(p)) {
       return (
         `Code & Automation Guide:\n` +
-        `• The Antigravity USB script uses pure Python (os, sys, shutil, subprocess, json, hashlib, secrets).\n` +
+        `• The VectorShell script uses pure Python (os, sys, shutil, subprocess, json, hashlib, secrets).\n` +
         `• Works on Windows, macOS, and Linux out of the box with zero pip installation required.\n` +
         `• Use 'setup' to create 1-click batch (.bat) and shell (.sh) launchers.`
       );
@@ -134,7 +133,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
 
     // 8. Natural conversational fallback
     return (
-      `I hear you! As your Antigravity AI companion, I'm here to help with "${prompt}".\n` +
+      `I hear you! As your VectorShell AI companion, I'm here to help with "${prompt}".\n` +
       `Feel free to ask me any technical question, request a Python automation script, or run built-in commands (type 'help' for the CLI menu).`
     );
   };
@@ -146,7 +145,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
       {
         id: thinkingId,
         type: 'system',
-        text: '[Antigravity AI Engine Thinking...]',
+        text: '[VectorShell AI Engine Thinking...]',
         timestamp: new Date().toLocaleTimeString(),
       },
     ]);
@@ -176,7 +175,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
     const trimmed = rawCmd.trim();
     if (!trimmed) return;
 
-    addLog('input', `Antigravity-USB> ${trimmed}`);
+    addLog('input', `VectorShell> ${trimmed}`);
 
     const parts = trimmed.split(' ');
     const cmd = parts[0].toLowerCase();
@@ -197,7 +196,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
   decrypt [file] [pass]    - Decrypt .agv locked file
   shred [file]             - Secure multi-pass file wipe
   genpass [length]         - Generate strong cryptographic password
-  ask [query]              - Chat with Antigravity AI Engine (Gemini LLM)
+  ask [query]              - Chat with VectorShell AI Engine (Gemini LLM)
   calc [expr]              - Offline scientific math calculator
   note add [title] [body]  - Save encrypted note to USB vault
   note list                - View all USB vault notes
@@ -218,7 +217,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
   Processor             : Intel(R) Core(TM) i7-13700K / Apple M-Series
   Python Version        : 3.11.4 Standard Runtime
   Hostname              : OFFLINE-USB-HOST
-  USB Script Location   : E:\\Antigravity_USB\\usb_antigravity.py
+  USB Script Location   : E:\\VectorShell\\vectorshell.py
   Date/Time             : ${new Date().toLocaleString()}
 ------------------------------------------------------------`
         );
@@ -318,7 +317,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
             sanitized = sanitized.replace(/pi/g, 'Math.PI');
             // eslint-disable-next-line no-eval
             const result = eval(sanitized);
-            addLog('success', `[Antigravity Offline Math Engine] Result: ${result}`);
+            addLog('success', `[VectorShell Offline Math Engine] Result: ${result}`);
           } catch {
             addLog('error', `Invalid mathematical expression: ${expr}`);
           }
@@ -346,7 +345,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
       case 'explain':
         const query = args.join(' ');
         if (!query) {
-          addLog('output', '[Antigravity AI Engine] Ask me anything about system automation, offline python scripts, or code logic!');
+          addLog('output', '[VectorShell AI Engine] Ask me anything about system automation, offline python scripts, or code logic!');
         } else {
           callGeminiApi(query);
         }
@@ -387,36 +386,9 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
   };
 
   return (
-    <div className="space-y-4">
-      {/* Top Banner & Preset Quick Buttons */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xl">
-        <div className="space-y-1">
-          <div className="flex items-center space-x-2">
-            <Sparkles className="w-5 h-5 text-cyan-400" />
-            <h2 className="text-lg font-bold text-white">Interactive USB Python Terminal Simulator</h2>
-          </div>
-          <p className="text-sm text-slate-400">
-            Test the offline Python script in real-time right here in your browser before exporting to USB.
-          </p>
-        </div>
-
-        {/* Quick Command Chips */}
-        <div className="flex flex-wrap gap-2">
-          {['sysinfo', 'clean', 'genpass 16', 'ask python offline tips', 'organize', 'help'].map((sample) => (
-            <button
-              key={sample}
-              onClick={() => executeCommand(sample)}
-              className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-mono rounded-lg border border-slate-700 flex items-center space-x-1 transition-all"
-            >
-              <Play className="w-3 h-3 text-cyan-400" />
-              <span>{sample}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
+    <div className="flex-1 flex flex-col h-[calc(100vh-140px)] min-h-[500px]">
       {/* Terminal Output Console */}
-      <div className="bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden font-mono text-sm flex flex-col h-[520px]">
+      <div className="bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden font-mono text-sm flex flex-col flex-1">
         {/* Terminal Header Bar */}
         <div className="bg-slate-900 px-4 py-2.5 border-b border-slate-800 flex items-center justify-between select-none">
           <div className="flex items-center space-x-2">
@@ -425,7 +397,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
             <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
             <span className="ml-2 text-xs text-slate-400 font-semibold flex items-center space-x-1">
               <Terminal className="w-3.5 h-3.5 text-cyan-400" />
-              <span>usb_antigravity.py (Offline Shell)</span>
+              <span>vectorshell.py (Offline Shell)</span>
             </span>
           </div>
 
@@ -489,7 +461,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
 
         {/* Input Command Line */}
         <div className="p-3 bg-slate-900 border-t border-slate-800 flex items-center space-x-2">
-          <span className="text-cyan-400 font-bold pl-2 select-none">Antigravity-USB&gt;</span>
+          <span className="text-cyan-400 font-bold pl-2 select-none">VectorShell&gt;</span>
           <input
             type="text"
             value={input}

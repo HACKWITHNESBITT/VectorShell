@@ -21,12 +21,12 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <span className="font-bold text-white tracking-wide text-lg">Antigravity USB</span>
+                <span className="font-bold text-white tracking-wide text-lg">VectorShell</span>
                 <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
                   Offline Suite
                 </span>
               </div>
-              <p className="text-xs text-slate-400">Zero Dependencies • USB Portable • Pure Python 3</p>
+              <p className="text-xs text-slate-400">Zero Dependencies • USB Portable</p>
             </div>
           </div>
 
