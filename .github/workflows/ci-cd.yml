@@ -1,0 +1,61 @@
+name: VectorShell CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  lint-and-build:
+    name: 🧪 CI - Lint, Type-Check & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci || npm install
+
+      - name: 🔍 Type check & Lint
+        run: npm run lint
+
+      - name: 🏗️ Build distribution bundle
+        run: npm run build
+
+      - name: 📤 Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-build
+          path: dist/
+          retention-days: 1
+
+  deploy:
+    name: 🚀 CD - Auto Deploy on Success
+    needs: lint-and-build
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📡 Trigger Render Deploy Hook
+        env:
+          RENDER_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -n "$RENDER_HOOK" ]; then
+            echo "🚀 Triggering Render auto-deployment..."
+            curl -X POST "$RENDER_HOOK" -f
+            echo "✅ Render deployment hook triggered successfully!"
+          else
+            echo "ℹ️ RENDER_DEPLOY_HOOK_URL secret is not set. Skipping deploy hook trigger."
+            echo "💡 To enable auto-deploy to Render, add RENDER_DEPLOY_HOOK_URL to your GitHub repository secrets."
+          fi

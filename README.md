@@ -89,6 +89,27 @@
 
 ---
 
+## 🔄 Automated CI/CD & Auto-Deployment Pipeline
+
+VectorShell includes a GitHub Actions CI/CD workflow located at `.github/workflows/ci-cd.yml`.
+
+### How It Works:
+1. **Continuous Integration (`lint-and-build`)**:
+   - Triggers automatically on every `push` or `pull_request` to `main` / `master` branches.
+   - Installs Node v20 dependencies, runs TypeScript compilation checks (`npm run lint`), and builds the production bundle (`npm run build`).
+2. **Continuous Deployment (`deploy`)**:
+   - Executes **only after CI passes** on the `main` or `master` branch.
+   - Triggers automatic deployment to Render via Deploy Hook.
+
+### Enabling Auto-Deployment:
+1. In your Render Dashboard, navigate to your **VectorShell** web service settings.
+2. Scroll to **Deploy Hook** and copy the Deploy Hook URL.
+3. In your GitHub repository, navigate to **Settings** -> **Secrets and variables** -> **Actions**.
+4. Create a new repository secret named `RENDER_DEPLOY_HOOK_URL` and paste the URL.
+5. Every time code is pushed and CI passes, GitHub Actions will trigger an instant deployment!
+
+---
+
 ## 👨‍💻 Creator & Maintainer
 
 Created with care by **Victor Kimutai**.  
