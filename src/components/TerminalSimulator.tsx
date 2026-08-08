@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { TerminalLog } from '../types';
 import { Terminal, Send, Trash2, Copy, Check } from 'lucide-react';
+import logoImg from '../assets/images/vectorshell_logo_1786147436152.jpg';
 
 // Subcomponent for ChatGPT-style Code Block with Copy button & syntax styling
 const CodeSnippetBlock: React.FC<{ lang: string; code: string }> = ({ lang, code }) => {
@@ -462,8 +463,13 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
             <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
             <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
             <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-            <span className="ml-2 text-xs text-slate-400 font-semibold flex items-center space-x-1">
-              <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="ml-2 text-xs text-slate-400 font-semibold flex items-center space-x-1.5">
+              <img
+                src={logoImg}
+                alt="Logo"
+                className="w-4 h-4 rounded object-cover border border-cyan-500/30"
+                referrerPolicy="no-referrer"
+              />
               <span>vectorshell.py (Offline Shell)</span>
             </span>
           </div>

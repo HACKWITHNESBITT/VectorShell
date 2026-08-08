@@ -1,6 +1,7 @@
 import React from 'react';
-import { Terminal, Shield, Download, HardDrive, Cpu, HelpCircle, Code } from 'lucide-react';
+import { Terminal, Shield, Download, Cpu, HelpCircle, Code } from 'lucide-react';
 import { ActiveTab } from '../types';
+import logoImg from '../assets/images/vectorshell_logo_1786147436152.jpg';
 
 interface HeaderProps {
   activeTab: ActiveTab;
@@ -16,8 +17,13 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
           
           {/* Logo & Status */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/20">
-              <HardDrive className="w-6 h-6" />
+            <div className="w-10 h-10 rounded-xl overflow-hidden border border-cyan-500/40 shadow-lg shadow-cyan-500/20 bg-slate-950 flex items-center justify-center">
+              <img
+                src={logoImg}
+                alt="VectorShell Logo"
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <div>
               <div className="flex items-center space-x-2">
