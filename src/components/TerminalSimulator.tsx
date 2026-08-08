@@ -134,13 +134,91 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
       }
     }
 
-    // 2. Greetings & Friendly chatter
-    if (/\b(hello|hi|hey|greetings|friend|howdy|sup|yo|good morning|good afternoon)\b/i.test(p)) {
+    // 2. Greetings & Friendly chatter (only if prompt is primarily a greeting without a specific coding/script request)
+    const isPureGreeting = /^(hello|hi|hey|greetings|friend|howdy|sup|yo|good morning|good afternoon)[\!\.\?]*$/i.test(p) ||
+      (/\b(hello|hi|hey|greetings|howdy)\b/i.test(p) && p.length < 20 && !/\b(script|python|code|write|create|scan|virus|encrypt|file|how|build)\b/i.test(p));
+
+    if (isPureGreeting) {
       return (
         `Greetings, friend! I am your VectorShell AI companion.\n` +
         `I can help you with CLI automation, Python scripting, file encryption, storage maintenance, and general technical questions.\n` +
         `How can I assist you today?`
       );
+    }
+
+    // 2b. Virus / File Scanner / Security script generation request
+    if (/\b(virus|scan|scanner|malware|hash|threat|signature)\b/i.test(p) && /\b(script|python|code|create|build|write|make|generate)\b/i.test(p)) {
+      return `Hello! I'd be happy to help you build a lightweight file & signature scanner in Python.
+
+While full commercial antivirus software relies on complex kernel drivers and dynamic heuristic analysis, you can build a powerful **signature-based file scanner** in Python using SHA-256 hashes.
+
+The script below recursively scans a specified directory, computes **SHA-256 hashes** for files (using chunked reading for memory efficiency), checks against a list of known malicious hashes, and flags suspicious file characteristics (such as hidden double extensions like \`invoice.pdf.exe\`).
+
+### 🐍 VectorShell Virus & Hash Scanner Script
+
+\`\`\`python
+import os
+import hashlib
+import sys
+from datetime import datetime
+
+# --- CONFIGURATION ---
+# Add known malicious SHA-256 hashes (in lowercase)
+KNOWN_BAD_HASHES = {
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", # Sample hash
+}
+
+SUSPICIOUS_EXTENSIONS = {".exe", ".bat", ".vbs", ".ps1", ".cmd", ".scr", ".pif"}
+
+def calculate_sha256(filepath, chunk_size=65536):
+    """Compute SHA-256 checksum of a file efficiently in chunks."""
+    sha256 = hashlib.sha256()
+    try:
+        with open(filepath, 'rb') as f:
+            while chunk := f.read(chunk_size):
+                sha256.update(chunk)
+        return sha256.hexdigest().lower()
+    except Exception as e:
+        return None
+
+def scan_directory(target_dir):
+    """Scan target directory for suspicious files and hash matches."""
+    print(f"[*] Starting Security Scan on: {target_dir}")
+    print(f"[*] Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\\n" + "-"*60)
+    
+    files_scanned = 0
+    threats_found = 0
+
+    for root, _, files in os.walk(target_dir):
+        for filename in files:
+            files_scanned += 1
+            filepath = os.path.join(root, filename)
+            
+            # Check 1: Double extension detection (e.g. document.pdf.exe)
+            parts = filename.split('.')
+            if len(parts) > 2 and f".{parts[-1].lower()}" in SUSPICIOUS_EXTENSIONS:
+                print(f"[!] SUSPICIOUS DOUBLE EXTENSION: {filepath}")
+                threats_found += 1
+
+            # Check 2: Hash signature match
+            file_hash = calculate_sha256(filepath)
+            if file_hash in KNOWN_BAD_HASHES:
+                print(f"[DANGER] KNOWN MALICIOUS HASH MATCH: {filepath}")
+                print(f"         SHA-256: {file_hash}")
+                threats_found += 1
+
+    print("-" * 60)
+    print(f"[+] Scan Complete. Scanned: {files_scanned} files | Threats/Suspicious: {threats_found}")
+
+if __name__ == '__main__':
+    target = sys.argv[1] if len(sys.argv) > 1 else "."
+    scan_directory(target)
+\`\`\`
+
+To run this scanner locally:
+\`\`\`bash
+python vectorshell_scanner.py /path/to/scan
+\`\`\``;
     }
 
     // 3. How are you / status
