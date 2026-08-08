@@ -1,7 +1,7 @@
 # VectorShell v3.0
 
 > **Next-Generation Portable Terminal Simulator & Standalone USB Power Suite**  
-> **Created by:** [Victor Kimutai](https://victor-kimutai.onrender.com)  
+> **Created by:** [Victor Kimutai](https://victorkimutai.onrender.com)  
 > **Live Demo:** [https://vectorshell.onrender.com/](https://vectorshell.onrender.com/)
 
 ---
@@ -113,7 +113,7 @@ VectorShell includes a GitHub Actions CI/CD workflow located at `.github/workflo
 
 Created with care by **Victor Kimutai**.  
 To learn more about the author or explore other projects, visit:  
-[https://victor-kimutai.onrender.com](https://victor-kimutai.onrender.com)
+[https://victorkimutai.onrender.com](https://victorkimutai.onrender.com)
 
 ---
 

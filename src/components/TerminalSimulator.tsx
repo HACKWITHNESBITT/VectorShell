@@ -116,7 +116,7 @@ Type 'help' to view all commands, or 'ask <question>' to talk to offline AI.`,
 
     // Creator query check
     if (/\b(who created you|who made you|who built you|creator|developer|author|who developed you)\b/i.test(p)) {
-      return `I was created by Victor Kimutai. If you want to know more about him, you'll find him at https://victor-kimutai.onrender.com`;
+      return `I was created by Victor Kimutai. If you want to know more about him, you'll find him at https://victorkimutai.onrender.com`;
     }
 
     // 1. Math evaluation check
