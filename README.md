@@ -120,3 +120,4 @@ To learn more about the author or explore other projects, visit:
 ## License
 
 Distributed under the MIT License. Free for personal, commercial, and portable offline use.
+
